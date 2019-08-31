@@ -1,26 +1,31 @@
 import React from 'react';
-import logo from './logo.svg';
+import ReactDom from "react-dom";
+
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 import './App.css';
+import TopMenu from './components/TopMenu';
+import Products from'./components/pages/Products';
+
+import { CartProvider } from './contexts/Cart';
+
+const Index = () => <h1>Home</h1>;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <CartProvider>
+      <Router>
+        <div className="App">
+          <TopMenu />
+          
+          <Route path="/" exact component={Index} />
+          <Route path="/products/" exact component={Products} />
+        </div>
+      </Router>
+    </CartProvider>
   );
 }
+
+
 
 export default App;
